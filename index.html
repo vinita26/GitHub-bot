@@ -11,13 +11,11 @@
 </head>
 
 <body>
-  <h1 id="my h1">Header</h1>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="Main-nav">
   <a class="navbar-brand" href="#">GitHub Bot</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div id="myText">text</div>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -35,33 +33,5 @@
 </nav>
 
 
-  <div class="createRepoWidget">
-    <div class="container my-3 mx-auto border border-info rounded" id="repoWidget">
-      <div class="row p-3">
-        <form method="post" action="#" class="w-75 text-center">
-          <div class="form-group row">
-            <label for="repoName" class="col-sm-3 col-form-label">Repo Name</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" id="repoName" placeholder="Enter your repo name" value="">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="repoDesc" class="col-sm-3 col-form-label">Repo Description</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" id="repoDesc" placeholder="Description">
-            </div>
-          </div>
-          <div>
-            <button type="button" class="btn btn-primary" id="createRepo">Create Repo</button>
-            <button type="button" class="btn btn-danger cancelWidget" id="canceRepolWidget">Cancel</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="./node_modules/popper.js/dist/umd/popper.min.js"></script>
-  <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
