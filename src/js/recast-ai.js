@@ -12,6 +12,8 @@ export default class RecastApi{
         var queryCommand = document.getElementById('searchbox').value;
         console.log("queryCommand: "+queryCommand);
         
+        var gitHubAuthentication = "Bearer 8061c3510df2ce28c47dfb50ab152fda3d83b925";
+
        return fetch(uri+queryCommand, { method: "post",  headers: h,}).then((response) => {
                 response.json().then(response => {
                 console.log("response is:", response);
@@ -36,7 +38,8 @@ export default class RecastApi{
                 else if(response['results']['intents'][0]['slug']=="edit-issues"){
                     console.log("you are trying to edit issue now");
                     repoName = response['results']['entities']['git-repository'][0]['value'];
-                    issueId = response['results']['entities']['git-issue-id'][0]['value'];
+                    console.log("repo: "+repoName)
+                    var issueId = response['results']['entities']['git-issue-id'][0]['value'];
                     console.log("Issue Id:"+issueId);
                     var data = repoName + ' ' + issueId;
                     this.editIssueWidget(data);
@@ -46,7 +49,14 @@ export default class RecastApi{
                     repoName = response['results']['entities']['git-repository'][0]['value'];
                     this.displayAllIssues(repoName);
                 }
-
+                else if(response['results']['intents'][0]['slug']=="add-collaborators"){
+                    console.log("trying to add collaborators");
+                    repoName = response['results']['entities']['git-repository'][0]['value'];
+                    var collaboratorName = response['results']['entities']['user_id'][0]['value'];
+                    console.log("collname:"+collaboratorName);
+                    var data = repoName + ' ' + collaboratorName;
+                    this.addCollaboratorWidget(data);
+                }
              }).catch(function() {
                 console.log("There is some error in resolving name of repository from sentence...");
              });
@@ -72,7 +82,7 @@ export default class RecastApi{
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer 36b1694719bda3030b7b78ab300ffedbcb47c850"
+                    "Authorization": "Bearer 8061c3510df2ce28c47dfb50ab152fda3d83b925"
                 },
                 body: JSON.stringify({'name': data})
             }).then(response => response.json())
@@ -114,7 +124,7 @@ export default class RecastApi{
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer 36b1694719bda3030b7b78ab300ffedbcb47c850"
+                    "Authorization": "Bearer 8061c3510df2ce28c47dfb50ab152fda3d83b925"
                 },
                 body: JSON.stringify({
                     "title": IssueName,
@@ -137,7 +147,7 @@ export default class RecastApi{
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer 36b1694719bda3030b7b78ab300ffedbcb47c850"
+                    "Authorization": "Bearer 8061c3510df2ce28c47dfb50ab152fda3d83b925"
                 }
             }).then(response => console.log("response:",response))
               .catch(error => console.error("ERROR::", error));
@@ -159,31 +169,75 @@ export default class RecastApi{
             div1.id= "editIssue";
             body.append(div1);
 
-            var createIssueHTML = '<div class="container my-3 mx-auto border border-info rounded" id="issueWidget"> <div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row"><label for="repoName" class="col-sm-3 col-form-label">Repository Name:*</label><div class="col-sm-9"><input type="text" class="form-control" id="RepoName" value='+RepoName+'></div> </div><div class="form-group row"> <label for="issueTitle" class="col-sm-3 col-form-label">Issue Title:*</label><div class="col-sm-9"> <input type="text" class="form-control" id="issueTitle" value='+IssueName+'> </div> </div> <div><button type="button" class="btn btn-primary" id="createIssue">Create Issue</button> <button type="button" class="btn btn-danger cancelWidget" id="cancelIssueWidget">Cancel</button> </div> </form> </div> </div></div>';
+            var editIssueHTML = '<div class="container my-3 mx-auto border border-info rounded" id="issueWidget"> <div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row"><label for="repoName" class="col-sm-3 col-form-label">Repository Name:*</label><div class="col-sm-9"><input type="text" class="form-control" id="RepoName" value='+RepoName+'></div> </div><div class="form-group row"> <label for="issueTitle" class="col-sm-3 col-form-label">Issue Id:*</label><div class="col-sm-9"> <input type="text" class="form-control" id="issueTitle" value='+IssueId+'> </div> </div> <div><button type="button" class="btn btn-primary" id="editIssue">Edit Issue</button> <button type="button" class="btn btn-danger cancelWidget" id="cancelEditIssueWidget">Cancel</button> </div> </form> </div> </div></div>';
 
-            div1.innerHTML = createIssueHTML;
-            document.getElementById("createIssue").addEventListener("click",createIssueFunction(data));
+            div1.innerHTML = editIssueHTML;
 
-            function createIssueFunction(){
-                const issueUri = 'https://api.github.com/repos/vinita26/' + RepoName + '/issues';
+            document.getElementById("editIssue").addEventListener("click",editIssueFunction(data));
+
+            function editIssueFunction(){
+                const issueUri = 'https://api.github.com/repos/vinita26/' + RepoName + '/issues/'+IssueId;
                 console.log("issueUri", issueUri);
                 fetch(issueUri, {
-                method: 'POST',
+                method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer 36b1694719bda3030b7b78ab300ffedbcb47c850"
+                    "Authorization": "Bearer 8061c3510df2ce28c47dfb50ab152fda3d83b925"
                 },
                 body: JSON.stringify({
-                    "title": IssueName,
-                    "assignees": [
-                      "vinita26"
-                    ]
+                    "number": IssueId,
+                    "state": "closed"
                   })
             }).then(response => response.json())
               .catch(error => console.error("ERROR::", error));
             }
+
+            document.getElementById("cancelEditIssueWidget").addEventListener("click",closeRepoWidget);
+            function closeRepoWidget(){
+                div1.innerHTML = null;
+            }
         }
 
+        addCollaboratorWidget(data){
+            console.log("inside addCollaboratorWidget, data value:"+data);
+
+            var arrayData = data.split(' ');
+            var RepoName = arrayData[0];
+            console.log("reponame: ",RepoName);
+
+            var CollaboratorName = arrayData[1];
+            console.log("CollaboratorName: ",CollaboratorName);
+
+            var body = document.querySelector('body');    
+            let div1 = document.createElement('div');
+            div1.id= "editIssue";
+            body.append(div1);
+
+            var editIssueHTML = '<div class="container my-3 mx-auto border border-info rounded" id="issueWidget"> <div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row"><label for="repoName" class="col-sm-3 col-form-label">Repository Name:*</label><div class="col-sm-9"><input type="text" class="form-control" id="RepoName" value='+RepoName+'></div> </div><div class="form-group row"> <label for="issueTitle" class="col-sm-3 col-form-label">CollaboratorId:*</label><div class="col-sm-9"> <input type="text" class="form-control" id="issueTitle" value='+CollaboratorName+'> </div> </div> <div><button type="button" class="btn btn-primary" id="addCollaborator">Add Collaborator</button> <button type="button" class="btn btn-danger cancelWidget" id="cancelEditIssueWidget">Cancel</button> </div> </form> </div> </div></div>';
+
+            div1.innerHTML = editIssueHTML;
+
+            document.getElementById("addCollaborator").addEventListener("click",addCollaboratorFunction(data));
+
+            function addCollaboratorFunction(){
+                const issueUri = 'https://api.github.com/repos/vinita26/' + RepoName + '/collaborators/'+CollaboratorName;
+                console.log("issueUri", issueUri);
+                fetch(issueUri, {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer 8061c3510df2ce28c47dfb50ab152fda3d83b925"
+                }
+            }).then(response => response.json())
+              .catch(error => console.error("ERROR::", error));
+            }
+
+            document.getElementById("cancelEditIssueWidget").addEventListener("click",closeRepoWidget);
+            function closeRepoWidget(){
+                div1.innerHTML = null;
+            }
+        }
+        
 }
 
 
