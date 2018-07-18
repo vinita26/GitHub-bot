@@ -82,7 +82,7 @@ export default class RecastApi{
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer 8061c3510df2ce28c47dfb50ab152fda3d83b925"
+                    "Authorization": "Bearer e0529e6c8e5add56aa3d0624d7884ae54e24c201"
                 },
                 body: JSON.stringify({'name': data})
             }).then(response => response.json())
@@ -124,7 +124,7 @@ export default class RecastApi{
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer 8061c3510df2ce28c47dfb50ab152fda3d83b925"
+                    "Authorization": "Bearer e0529e6c8e5add56aa3d0624d7884ae54e24c201"
                 },
                 body: JSON.stringify({
                     "title": IssueName,
@@ -147,7 +147,7 @@ export default class RecastApi{
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer 8061c3510df2ce28c47dfb50ab152fda3d83b925"
+                    "Authorization": "Bearer e0529e6c8e5add56aa3d0624d7884ae54e24c201"
                 }
             }).then(response => console.log("response:",response))
               .catch(error => console.error("ERROR::", error));
@@ -182,7 +182,7 @@ export default class RecastApi{
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer 8061c3510df2ce28c47dfb50ab152fda3d83b925"
+                    "Authorization": "Bearer e0529e6c8e5add56aa3d0624d7884ae54e24c201"
                 },
                 body: JSON.stringify({
                     "number": IssueId,
@@ -226,7 +226,7 @@ export default class RecastApi{
                 method: 'PUT',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer 8061c3510df2ce28c47dfb50ab152fda3d83b925"
+                    "Authorization": "Bearer e0529e6c8e5add56aa3d0624d7884ae54e24c201"
                 }
             }).then(response => response.json())
               .catch(error => console.error("ERROR::", error));
