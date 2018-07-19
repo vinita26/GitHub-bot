@@ -12,12 +12,11 @@ export default class RecastApi{
         var queryCommand = document.getElementById('searchbox').value;
         console.log("queryCommand: "+queryCommand);
         
-        var gitHubAuthentication = "Bearer 8061c3510df2ce28c47dfb50ab152fda3d83b925";
+        var gitHubAuthentication = "Bearer 96ac92fd1d1deef423d9912f4bdca93acfb1ecbb";
 
        return fetch(uri+queryCommand, { method: "post",  headers: h,}).then((response) => {
                 response.json().then(response => {
                 console.log("response is:", response);
-                console.log("Length is:", Object.keys(response['results']['entities']).length);
                 
                 if(response['results']['intents'][0]['slug']=="create-repo"){
 
@@ -67,13 +66,14 @@ export default class RecastApi{
 
         createRepoWidget(data){
             console.log("inside createRepoWidget, data value:"+data);
+            var myArr = [];
             var body = document.querySelector('body');    
             let div1 = document.createElement('div');
             div1.id= "createRepo";
             div1.className = "createNewrepo";
             body.append(div1);
 
-            var createRepoHTML = '<div class="container my-3 mx-auto border border-info rounded" id="repoWidget">    <div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row">    <label for="repoName" class="col-sm-3 col-form-label">Repo Name</label>  <div class="col-sm-9"> <input type="text" class="form-control" id="repoName" value='+data+'>  </div>  </div> <div class="form-group row">   <label for="repoDesc" class="col-sm-3 col-form-label">Repo Description</label>   <div class="col-sm-9">    <input type="text" class="form-control" id="repoDesc" placeholder="Description">   </div>   </div>   <div>    <button type="button" class="btn btn-primary" id="createRepo">Create Repo</button>  <button type="button" class="btn btn-danger cancelWidget" id="canceRepolWidget">Cancel</button>    </div>  </form>   </div>  </div>';
+            var createRepoHTML = '<div class="container my-3 mx-auto border border-info rounded" id="repoWidget">    <div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row">    <label for="repoName" class="col-sm-3 col-form-label">Repo Name:*</label>  <div class="col-sm-9"> <input type="text" class="form-control" id="repoName" value='+data+'>  </div>  </div> <div class="form-group row">   <label for="repoDesc" class="col-sm-3 col-form-label">Repo Description</label>   <div class="col-sm-9">    <input type="text" class="form-control" id="repoDesc" placeholder="Give Repo Description">   </div>   </div>   <div>    <button type="button" class="btn btn-primary" id="createRepo">Create Repo</button>  <button type="button" class="btn btn-danger cancelWidget" id="cancelCreateRepoWidget">Cancel</button>    </div>  </form>   </div>  </div>';
             div1.innerHTML = createRepoHTML;
             document.getElementById("createRepo").addEventListener("click",createRepoFunction(data));
 
@@ -82,16 +82,19 @@ export default class RecastApi{
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer e0529e6c8e5add56aa3d0624d7884ae54e24c201"
+                    "Authorization": "Bearer 96ac92fd1d1deef423d9912f4bdca93acfb1ecbb"
                 },
                 body: JSON.stringify({'name': data})
-            }).then(response => response.json())
+            }).then(response => response.json()
+                    // ,myArr = response.json()),
+                    // console.log("My arr value is: ",myArr
+                )
             .catch(error => console.error("ERROR::", error));
         
             }
 
-            document.getElementById("canceRepolWidget").addEventListener("click",closeRepoWidget);
-            function closeRepoWidget(){
+            document.getElementById("cancelCreateRepoWidget").addEventListener("click",closeCreateRepoWidget);
+            function closeCreateRepoWidget(){
                 div1.innerHTML = null;
             }
         }
@@ -112,11 +115,11 @@ export default class RecastApi{
             div1.className = "createNewIssue";
             body.append(div1);
 
-            var createIssueHTML = '<div class="container my-3 mx-auto border border-info rounded" id="issueWidget"> <div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row"><label for="repoName" class="col-sm-3 col-form-label">Repository Name:*</label><div class="col-sm-9"><input type="text" class="form-control" id="RepoName" value='+RepoName+'></div> </div><div class="form-group row"> <label for="issueTitle" class="col-sm-3 col-form-label">Issue Title:*</label><div class="col-sm-9"> <input type="text" class="form-control" id="issueTitle" value='+IssueName+'> </div> </div> <div><button type="button" class="btn btn-primary" id="createIssue">Create Issue</button> <button type="button" class="btn btn-danger cancelWidget" id="cancelIssueWidget">Cancel</button> </div> </form> </div> </div></div>';
+            var createIssueHTML = '<div class="container my-3 mx-auto border border-info rounded" id="issueWidget"> <div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row"><label for="repoName" class="col-sm-3 col-form-label">Repository Name:*</label><div class="col-sm-9"><input type="text" class="form-control" id="RepoName" value='+RepoName+'></div> </div><div class="form-group row"> <label for="issueTitle" class="col-sm-3 col-form-label">Issue Title:*</label><div class="col-sm-9"> <input type="text" class="form-control" id="issueTitle" value='+IssueName+'> </div> </div> <div><button type="button" class="btn btn-primary" id="createIssue">Create Issue</button> <button type="button" class="btn btn-danger cancelWidget" id="cancelCreateIssueWidget">Cancel</button> </div> </form> </div> </div></div>';
 
             div1.innerHTML = createIssueHTML;
             document.getElementById("createIssue").addEventListener("click",createIssueFunction(data));
-
+            
             function createIssueFunction(){
                 const issueUri = 'https://api.github.com/repos/vinita26/' + RepoName + '/issues';
                 console.log("issueUri", issueUri);
@@ -124,7 +127,7 @@ export default class RecastApi{
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer e0529e6c8e5add56aa3d0624d7884ae54e24c201"
+                    "Authorization": "Bearer 96ac92fd1d1deef423d9912f4bdca93acfb1ecbb"
                 },
                 body: JSON.stringify({
                     "title": IssueName,
@@ -132,26 +135,79 @@ export default class RecastApi{
                       "vinita26"
                     ]
                   })
-            }).then(response => response.json())
+            }).then(response => {
+                if(response.status=='201'){
+                    alert("Issue created successfully");
+                }
+                else{
+                    alert("Issue creation failed");
+                }
+            })
               .catch(error => console.error("ERROR::", error));
+            }
+            document.getElementById("cancelCreateIssueWidget").addEventListener("click",closeCreateIssueWidget);
+            function closeCreateIssueWidget(){
+                div1.innerHTML = null;
             }
         }
 
         displayAllIssues(data){
-            console.log("inside displayAllIssues, data value:"+data);
-                        
-            
+            console.log("inside displayAllIssues, data value:"+data);  
+                var myArray =[];
                 const issueUri = 'https://api.github.com/repos/vinita26/' + data + '/issues';
                 console.log("issueUri", issueUri);
+
                 fetch(issueUri, {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer e0529e6c8e5add56aa3d0624d7884ae54e24c201"
+                    "Authorization": "Bearer 96ac92fd1d1deef423d9912f4bdca93acfb1ecbb"
                 }
-            }).then(response => console.log("response:",response))
-              .catch(error => console.error("ERROR::", error));
-            
+            }) .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {                    
+                      throw new Error('No response found');
+                }
+            })
+            .then((jsonData) => {
+                myArray = jsonData;
+                console.log("response data:", myArray);
+                var arrayLength = myArray.length;
+
+                var body = document.querySelector('body');    
+                var h3 = document.createElement('h3');
+                h3.innerHTML = "This repo has "+arrayLength+" issues, below is the detailed statement:";
+                body.append(h3);              
+                
+
+                for (var i = 0; i < arrayLength; i++) {
+                console.log(myArray[i]);
+                console.log("Issue Title name:", myArray[i]['title']);
+                console.log("Assignee name:", myArray[i]['assignee']['login']);
+                console.log("Issue id:", myArray[i]['number']);
+                console.log("Issue state:", myArray[i]['state']);
+
+                var issueTitle = myArray[i]['title'];
+                var assigneeName = myArray[i]['assignee']['login'];
+                var issueId = myArray[i]['number'];
+                var issueState = myArray[i]['state'];
+                
+                
+                let div1 = document.createElement('div');
+                div1.id= "displayIssue";
+
+                var displayDataIssuesHTML = '<div class="container my-3 mx-auto border border-info rounded" id="repoWidget"><div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row"> <label for="repoName" class="col-sm-3 col-form-label">Issue Title:</label> <div class="col-sm-9"> <input type="text" class="form-control" id="issueTitle" value='+issueTitle+'></div> </div> <div class="form-group row"><label for="repoDesc" class="col-sm-3 col-form-label">Assignee name:</label>            <div class="col-sm-9"> <input type="text" class="form-control" id="assigneeName" value='+assigneeName+'>  </div>  </div><div class="form-group row"><label for="repoDesc" class="col-sm-3 col-form-label">Issue id:</label> <div class="col-sm-9">                     <input type="text" class="form-control" id="issueId" value='+issueId+'>                     </div> </div><div class="form-group row"> <label for="repoDesc" class="col-sm-3 col-form-label">Issue state:</label>  <div class="col-sm-9"><input type="text" class="form-control" id="issueState" value='+issueState+'> </div> </div> </form> </div>           </div>';
+                
+                div1.innerHTML = displayDataIssuesHTML;
+                body.append(div1);
+                }
+                
+            })
+            .catch((err) => {
+                console.log("Error:", err.message);
+            })
+               
         }
 
         editIssueWidget(data){
@@ -169,7 +225,7 @@ export default class RecastApi{
             div1.id= "editIssue";
             body.append(div1);
 
-            var editIssueHTML = '<div class="container my-3 mx-auto border border-info rounded" id="issueWidget"> <div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row"><label for="repoName" class="col-sm-3 col-form-label">Repository Name:*</label><div class="col-sm-9"><input type="text" class="form-control" id="RepoName" value='+RepoName+'></div> </div><div class="form-group row"> <label for="issueTitle" class="col-sm-3 col-form-label">Issue Id:*</label><div class="col-sm-9"> <input type="text" class="form-control" id="issueTitle" value='+IssueId+'> </div> </div> <div><button type="button" class="btn btn-primary" id="editIssue">Edit Issue</button> <button type="button" class="btn btn-danger cancelWidget" id="cancelEditIssueWidget">Cancel</button> </div> </form> </div> </div></div>';
+            var editIssueHTML = '<div class="container my-3 mx-auto border border-info rounded" id="issueWidget"> <div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row"><label for="repoName" class="col-sm-3 col-form-label">Repository Name:*</label><div class="col-sm-9"><input type="text" class="form-control" id="RepoName" value='+RepoName+'></div> </div><div class="form-group row"> <label for="issueTitle" class="col-sm-3 col-form-label">Issue Id:*</label><div class="col-sm-9"> <input type="text" class="form-control" id="issueTitle" value='+IssueId+'> </div> </div> <div><button type="button" class="btn btn-primary" id="editIssue">Close Issue</button> <button type="button" class="btn btn-danger cancelWidget" id="cancelEditIssueWidget">Cancel</button> </div> </form> </div> </div></div>';
 
             div1.innerHTML = editIssueHTML;
 
@@ -182,15 +238,22 @@ export default class RecastApi{
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer e0529e6c8e5add56aa3d0624d7884ae54e24c201"
+                    "Authorization": "Bearer 96ac92fd1d1deef423d9912f4bdca93acfb1ecbb"
                 },
                 body: JSON.stringify({
                     "number": IssueId,
                     "state": "closed"
                   })
-            }).then(response => response.json())
-              .catch(error => console.error("ERROR::", error));
-            }
+            }).then(response => {
+                if(response.status=='201' || response.status=='200'){
+                    alert("Issue closed successfully");
+                }
+                else{
+                    alert("Error: "+response.status+ " Issue is not closed");
+                }
+            })
+            .catch(error => console.error("ERROR::", error));
+          }
 
             document.getElementById("cancelEditIssueWidget").addEventListener("click",closeRepoWidget);
             function closeRepoWidget(){
@@ -226,7 +289,7 @@ export default class RecastApi{
                 method: 'PUT',
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer e0529e6c8e5add56aa3d0624d7884ae54e24c201"
+                    "Authorization": "Bearer 96ac92fd1d1deef423d9912f4bdca93acfb1ecbb"
                 }
             }).then(response => response.json())
               .catch(error => console.error("ERROR::", error));

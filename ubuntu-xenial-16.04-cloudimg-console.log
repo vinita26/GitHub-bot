@@ -612,4 +612,37 @@ g Debug File System...
 
 Ubuntu 16.04.4 LTS ubuntu-xenial ttyS0
 
-ubuntu-xenial login: 
+ubuntu-xenial login: [162721.176340] e1000 0000:00:03.0 enp0s3: Detected Tx Unit Hang
+[162721.176340]   Tx Queue             <0>
+[162721.176340]   TDH                  <bb>
+[162721.176340]   TDT                  <bf>
+[162721.176340]   next_to_use          <bf>
+[162721.176340]   next_to_clean        <bb>
+[162721.176340] buffer_info[next_to_clean]
+[162721.176340]   time_stamp           <1026b92a3>
+[162721.176340]   next_to_watch        <be>
+[162721.176340]   jiffies              <1026b966f>
+[162721.176340]   next_to_watch.status <0>
+[162723.228428] e1000 0000:00:03.0 enp0s3: Detected Tx Unit Hang
+[162723.228428]   Tx Queue             <0>
+[162723.228428]   TDH                  <bb>
+[162723.228428]   TDT                  <bf>
+[162723.228428]   next_to_use          <bf>
+[162723.228428]   next_to_clean        <bb>
+[162723.228428] buffer_info[next_to_clean]
+[162723.228428]   time_stamp           <1026b92a3>
+[162723.228428]   next_to_watch        <be>
+[162723.228428]   jiffies              <1026b9870>
+[162723.228428]   next_to_watch.status <0>
+[162725.240391] e1000 0000:00:03.0 enp0s3: Detected Tx Unit Hang
+[162725.240391]   Tx Queue             <0>
+[162725.240391]   TDH                  <bb>
+[162725.240391]   TDT                  <bf>
+[162725.240391]   next_to_use          <bf>
+[162725.240391]   next_to_clean        <bb>
+[162725.240391] buffer_info[next_to_clean]
+[162725.240391]   time_stamp           <1026b92a3>
+[162725.240391]   next_to_watch        <be>
+[162725.240391]   jiffies              <1026b9a67>
+[162725.240391]   next_to_watch.status <0>
+[162725.804287] e1000 0000:00:03.0 enp0s3: Reset adapter
