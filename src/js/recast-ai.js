@@ -67,7 +67,7 @@ export default class RecastApi{
                     var data = repoName + ' ' + collaboratorName;
                     addCollaborators.addCollaboratorWidget(data);
                 }
-             }).catch(function() {
+             }).catch(function(err) {
                 console.log("There is some error in resolving name of repository from sentence...");
              });
           }).catch(function() {

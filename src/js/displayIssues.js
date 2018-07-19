@@ -9,7 +9,7 @@ export default class DisplayIssues{
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer e8f3892ef69841c8248540b9d2959592193275b7"
+                "Authorization": "Bearer 243e8ea575e546923c0024d16ee28630cd0f8d4d"
             }
         }) .then((response) => {
             if (response.ok) {
@@ -45,7 +45,7 @@ export default class DisplayIssues{
             let div1 = document.createElement('div');
             div1.id= "displayIssue";
 
-            var displayDataIssuesHTML = '<div class="container my-3 mx-auto border border-info rounded" id="repoWidget"><div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row"> <label for="repoName" class="col-sm-3 col-form-label">Issue Title:</label> <div class="col-sm-9"> <input type="text" class="form-control" id="issueTitle" value='+issueTitle+'></div> </div> <div class="form-group row"><label for="repoDesc" class="col-sm-3 col-form-label">Assignee name:</label>            <div class="col-sm-9"> <input type="text" class="form-control" id="assigneeName" value='+assigneeName+'>  </div>  </div><div class="form-group row"><label for="repoDesc" class="col-sm-3 col-form-label">Issue id:</label> <div class="col-sm-9">                     <input type="text" class="form-control" id="issueId" value='+issueId+'>                     </div> </div><div class="form-group row"> <label for="repoDesc" class="col-sm-3 col-form-label">Issue state:</label>  <div class="col-sm-9"><input type="text" class="form-control" id="issueState" value='+issueState+'> </div> </div> </form> </div>           </div>';
+            var displayDataIssuesHTML = '<div class="container my-3 mx-auto border border-info rounded" id="repoWidget"><h3>Display Issues: </h3><div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row"> <label for="repoName" class="col-sm-3 col-form-label">Issue Title:</label> <div class="col-sm-9"> <input type="text" class="form-control" id="issueTitle" value='+issueTitle+'></div> </div> <div class="form-group row"><label for="repoDesc" class="col-sm-3 col-form-label">Assignee name:</label>            <div class="col-sm-9"> <input type="text" class="form-control" id="assigneeName" value='+assigneeName+'>  </div>  </div><div class="form-group row"><label for="repoDesc" class="col-sm-3 col-form-label">Issue id:</label> <div class="col-sm-9"> <input type="text" class="form-control" id="issueId" value='+issueId+'>            </div> </div><div class="form-group row"> <label for="repoDesc" class="col-sm-3 col-form-label">Issue state:</label>  <div class="col-sm-9"><input type="text" class="form-control" id="issueState" value='+issueState+'> </div><div><button type="button" class="btn btn-primary" id="closeIssue">Close Issue</button> <button type="button" class="btn btn-danger cancelWidget" id="cancelDisplayIssueWidget">Cancel</button> </div> </form> </div> </div>';
             
             div1.innerHTML = displayDataIssuesHTML;
             body.append(div1);

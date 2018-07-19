@@ -15,11 +15,17 @@ export default class AddCollaborators{
         div1.id= "editIssue";
         body.append(div1);
 
-        var editIssueHTML = '<div class="container my-3 mx-auto border border-info rounded" id="issueWidget"> <div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row"><label for="repoName" class="col-sm-3 col-form-label">Repository Name:*</label><div class="col-sm-9"><input type="text" class="form-control" id="RepoName" value='+RepoName+'></div> </div><div class="form-group row"> <label for="issueTitle" class="col-sm-3 col-form-label">CollaboratorId:*</label><div class="col-sm-9"> <input type="text" class="form-control" id="issueTitle" value='+CollaboratorName+'> </div> </div> <div><button type="button" class="btn btn-primary" id="addCollaborator">Add Collaborator</button> <button type="button" class="btn btn-danger cancelWidget" id="cancelEditIssueWidget">Cancel</button> </div> </form> </div> </div></div>';
+        var editIssueHTML = '<div class="container my-3 mx-auto border border-info rounded" id="issueWidget"><h3>Add Collaborator: </h3><div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row"><label for="repoName" class="col-sm-3 col-form-label">Repository Name:*</label><div class="col-sm-9"><input type="text" class="form-control" id="RepoName" value='+RepoName+'></div> </div><div class="form-group row"> <label for="issueTitle" class="col-sm-3 col-form-label">CollaboratorId:*</label><div class="col-sm-9"> <input type="text" class="form-control" id="issueTitle" value='+CollaboratorName+'> </div> </div> <div><button type="button" class="btn btn-primary" id="addCollaborator">Add Collaborator</button> <button type="button" class="btn btn-danger cancelWidget" id="cancelEditIssueWidget">Cancel</button> </div> </form> </div> </div></div>';
 
         div1.innerHTML = editIssueHTML;
 
-        document.getElementById("addCollaborator").addEventListener("click",addCollaboratorFunction(data));
+        document.getElementById("addCollaborator").addEventListener("click",addCollaboratorFunction.bind(null,data));
+
+        var successAlertDiv = document.createElement('div');
+        successAlertDiv.innerHTML = '<div class="alert alert-success" role="alert"> added collaborator         </div>';
+
+        var failedAlertDiv = document.createElement('div');
+        failedAlertDiv.innerHTML = '<div class="alert alert-danger" role="alert"> Error: '+response.status+ ' collaborator is not added  </div>';
 
         function addCollaboratorFunction(){
             const issueUri = 'https://api.github.com/repos/vinita26/' + RepoName + '/collaborators/'+CollaboratorName;
@@ -28,11 +34,18 @@ export default class AddCollaborators{
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer e8f3892ef69841c8248540b9d2959592193275b7"
+                "Authorization": "Bearer 243e8ea575e546923c0024d16ee28630cd0f8d4d"
             }
-        }).then(response => response.json())
-          .catch(error => console.error("ERROR::", error));
-        }
+        }).then(response => {
+            if(response.status=='201' || response.status=='200'){
+                body.appendChild(successAlertDiv);
+            }
+            else{
+                body.appendChild(failedAlertDiv);
+            }
+        })
+        .catch(error => console.error("ERROR::", error));
+      }
 
         document.getElementById("cancelEditIssueWidget").addEventListener("click",closeRepoWidget);
         function closeRepoWidget(){

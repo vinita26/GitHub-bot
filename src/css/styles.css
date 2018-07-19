@@ -1,3 +1,4 @@
+@import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 .navbar{
   display: flex;
   justify-content: center;
@@ -6,4 +7,7 @@
   align-items: flex-start;
   width: 500px;
 }
-
+#bot-logo{
+  width: 40px;
+  height: 40px;
+}
