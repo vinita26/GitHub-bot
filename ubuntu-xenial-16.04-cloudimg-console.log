@@ -646,3 +646,48 @@ ubuntu-xenial login: [162721.176340] e1000 0000:00:03.0 enp0s3: Detected Tx Unit
 [162725.240391]   jiffies              <1026b9a67>
 [162725.240391]   next_to_watch.status <0>
 [162725.804287] e1000 0000:00:03.0 enp0s3: Reset adapter
+[170593.584417] e1000 0000:00:03.0 enp0s3: Detected Tx Unit Hang
+[170593.584417]   Tx Queue             <0>
+[170593.584417]   TDH                  <61>
+[170593.584417]   TDT                  <69>
+[170593.584417]   next_to_use          <69>
+[170593.584417]   next_to_clean        <61>
+[170593.584417] buffer_info[next_to_clean]
+[170593.584417]   time_stamp           <102899bec>
+[170593.584417]   next_to_watch        <68>
+[170593.584417]   jiffies              <102899e55>
+[170593.584417]   next_to_watch.status <0>
+[170595.612433] e1000 0000:00:03.0 enp0s3: Detected Tx Unit Hang
+[170595.612433]   Tx Queue             <0>
+[170595.612433]   TDH                  <61>
+[170595.612433]   TDT                  <69>
+[170595.612433]   next_to_use          <69>
+[170595.612433]   next_to_clean        <61>
+[170595.612433] buffer_info[next_to_clean]
+[170595.612433]   time_stamp           <102899bec>
+[170595.612433]   next_to_watch        <68>
+[170595.612433]   jiffies              <10289a050>
+[170595.612433]   next_to_watch.status <0>
+[170597.632478] e1000 0000:00:03.0 enp0s3: Detected Tx Unit Hang
+[170597.632478]   Tx Queue             <0>
+[170597.632478]   TDH                  <61>
+[170597.632478]   TDT                  <69>
+[170597.632478]   next_to_use          <69>
+[170597.632478]   next_to_clean        <61>
+[170597.632478] buffer_info[next_to_clean]
+[170597.632478]   time_stamp           <102899bec>
+[170597.632478]   next_to_watch        <68>
+[170597.632478]   jiffies              <10289a249>
+[170597.632478]   next_to_watch.status <0>
+[170599.684400] e1000 0000:00:03.0 enp0s3: Detected Tx Unit Hang
+[170599.684400]   Tx Queue             <0>
+[170599.684400]   TDH                  <61>
+[170599.684400]   TDT                  <69>
+[170599.684400]   next_to_use          <69>
+[170599.684400]   next_to_clean        <61>
+[170599.684400] buffer_info[next_to_clean]
+[170599.684400]   time_stamp           <102899bec>
+[170599.684400]   next_to_watch        <68>
+[170599.684400]   jiffies              <10289a44a>
+[170599.684400]   next_to_watch.status <0>
+[170600.812092] e1000 0000:00:03.0 enp0s3: Reset adapter
