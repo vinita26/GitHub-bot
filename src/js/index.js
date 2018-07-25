@@ -4,21 +4,18 @@ import 'bootstrap';
 import '../css/styles.css';
 
 // const recastVal = require('./recast-ai.js');
-import RecastApi from "./recast-ai";
+import RecastApi from './recast-ai';
 let recast = new RecastApi();
 
-document.getElementById("searchbox").addEventListener('keydown',callRecast);
-document.getElementById("submitQuery").addEventListener("click",callRecast);
-var query = document.getElementById("searchbox").value;
+document.getElementById('submitQuery').addEventListener('click',callRecast);
+
 
 function callRecast(){   
 
     recast.getBotValue()
-            .then(function(data){
-                console.log(data);
-                
+        .then(function(data){
+                // window.confirm(data);
             }).catch(function(error) {
-                console.log('There has been a problem with your create repository operation: ', error.message);
-                window.confirm("Error While Creating Respository");
+                window.confirm('Error While Creating Respository with error', error);
             });
 }
