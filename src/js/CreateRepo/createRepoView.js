@@ -1,7 +1,6 @@
-// export default class CreateRepo{
+import { createRepoController, createRepoCancelController } from "./createRepoController"; 
 
-   function createRepoWidget(data){
-        
+export function createRepoWidget(data){
         const body = document.querySelector('body');    
         let div1 = document.createElement('div');
         div1.id= 'createRepo';
@@ -34,12 +33,12 @@
        
         div1.innerHTML = createRepoHTML;
 
-    }
+        document.getElementById("createRepobutton").addEventListener("click",createRepoController.bind(null,data));
+        document.getElementById('cancelCreateRepoWidget').addEventListener('click',closeCreateRepoWidget);
 
-    closeCreateRepoWidget(){
-        div1.innerHTML = null;
-        successAlertDiv.innerHTML = null;
-        failedAlertDiv.innerHTML = null;
-    }
+        function closeCreateRepoWidget(){
+            div1.innerHTML = null;
+        }
+}
 
-// }
+

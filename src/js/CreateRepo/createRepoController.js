@@ -1,4 +1,10 @@
-document.getElementById("createRepobutton").addEventListener("click",createRepoFunction.bind(null,data));
+import {createRepoConfirmFunction} from './createRepoService';
 
 
-document.getElementById('cancelCreateRepoWidget').addEventListener('click',closeCreateRepoWidget);
+export function createRepoController(data){    
+    createRepoConfirmFunction(data);
+}
+
+export function createRepoCancelController(){    
+    createRepoCancelFunction();
+}

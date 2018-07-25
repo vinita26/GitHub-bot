@@ -1,6 +1,5 @@
-export default class DisplayIssues{
-    displayAllIssuesWidget(data){  
-            const gitHubAuthentication = 'Bearer 45eb8ee4eb30172cd306fa3b92872b642198d2ce';
+export function displayAllIssuesWidget(data){  
+            const gitHubAuthentication = 'Bearer 8c02c2d99549cc41b7c58921fad6d86b174f4566';
             var myArray =[];
             const issueUri = 'https://api.github.com/repos/vinita26/' + data + '/issues';
 
@@ -48,6 +47,4 @@ export default class DisplayIssues{
         .catch((err) => {
             window.confirm('Error:', err.message);
         });
-           
-    }
 }
