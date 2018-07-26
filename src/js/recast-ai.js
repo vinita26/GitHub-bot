@@ -10,6 +10,7 @@ import { editIssueWidget } from './EditIssue/editIssueView';
 import { displayAllIssuesWidget} from './displayIssues';
 import { addCollaboratorWidget } from './AddCollaborator/addCollaboratorView';
 
+export const gitHubAuthentication = 'Bearer cf6d95910b13164a19b2d29383eb706f0e581b05';
 
 
 export default class RecastApi{
@@ -23,8 +24,12 @@ export default class RecastApi{
                 
                 const slug = response['results']['intents'][0]['slug'];
                 const repoName = response['results']['entities']['git-repository'][0]['value'];
-            
+
                 if(slug=='create-repo'){
+                    // let localvalue = JSON.parse(window.localStorage.getItem('createRepoButtonKey'));
+                    // if(localvalue!=null){
+                    //     console.log("localvalue:", localvalue);
+                    // }
                     createRepoWidget(repoName);
                 }
                 else if(slug=='create-issue'){

@@ -1,5 +1,6 @@
+import {gitHubAuthentication} from './recast-ai';
+
 export function displayAllIssuesWidget(data){  
-            const gitHubAuthentication = 'Bearer 8c02c2d99549cc41b7c58921fad6d86b174f4566';
             var myArray =[];
             const issueUri = 'https://api.github.com/repos/vinita26/' + data + '/issues';
 

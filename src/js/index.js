@@ -2,12 +2,15 @@ import 'jquery';
 import 'popper.js';
 import 'bootstrap';
 import '../css/styles.css';
+import {store} from './state';
 
-// const recastVal = require('./recast-ai.js');
 import RecastApi from './recast-ai';
 let recast = new RecastApi();
 
+document.getElementById('submitQuery').addEventListener('click',triggerSearchAction);
 document.getElementById('submitQuery').addEventListener('click',callRecast);
+document.getElementById('submitQuery').addEventListener('click',clearQueryText);
+
 
 
 function callRecast(){   
@@ -16,6 +19,15 @@ function callRecast(){
         .then(function(data){
                 // window.confirm(data);
             }).catch(function(error) {
-                window.confirm('Error While Creating Respository with error', error);
+                window.confirm('Error While Executing the given command', error);
             });
+}
+
+function triggerSearchAction(){
+    const queryCommand = document.getElementById('searchbox').value;  
+    store.dispatch({type: 'SEARCHED_ITEM_CLICKED', item: 'SEARCHED_ITEM_CLICKED' + ' ' +queryCommand});
+   }
+
+function clearQueryText(){
+    document.getElementById('searchbox').value="";
 }

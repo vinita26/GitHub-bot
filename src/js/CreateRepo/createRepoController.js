@@ -1,7 +1,7 @@
 import {createRepoConfirmFunction} from './createRepoService';
 
 
-export function createRepoController(data){    
+export function createRepoController(data){  
     createRepoConfirmFunction(data);
 }
 

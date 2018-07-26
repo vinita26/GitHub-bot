@@ -1,11 +1,13 @@
+import {gitHubAuthentication} from '../recast-ai';
+import {store} from '../state';
+
 export function createIssueFunction(data){
 
     const arrayData = data.split(' ');
     const RepoName = arrayData[0];
 
     const IssueName = arrayData[1];
-    const gitHubAuthentication = 'Bearer 8c02c2d99549cc41b7c58921fad6d86b174f4566';
-
+    
     let body = document.querySelector('body'); 
 
     let successAlertDiv = document.createElement('div');
@@ -31,9 +33,11 @@ export function createIssueFunction(data){
 }).then(response => {
     if(response.status=='201' || response.status=='200'){
         body.appendChild(successAlertDiv);
+        store.dispatch({type: 'CREATE_ISSUE_CLICKED', item: 'CREATE_ISSUE_CLICKED' + ' ' +data});
     }
     else{
         body.appendChild(failedAlertDiv);
+        store.dispatch({type: 'CREATE_ISSUE_CLICKED', item: 'CREATE_ISSUE_CLICKED' + ' ' +data});
     }
 })
 .catch(error => window.confirm("ERROR::", error));

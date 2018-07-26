@@ -16,6 +16,7 @@ export function createIssueWidget(data){
 
     let createIssueHTML = `
     <div class="container my-3 mx-auto border border-info rounded" id="issueWidget">
+    <h3>Create Issue:</h3>
     <div class="row p-3">
         <form method="post" action="#" class="w-75 text-center">
             <div class="form-group row">
@@ -49,8 +50,8 @@ export function createIssueWidget(data){
                 </div>
             </div>
             <div>
-                <button type="button" class="btn btn-primary" id="createIssueBtn">Create Isuue</button>
-                <button type="button" class="btn btn-danger cancelWidget" id="cancelCreateIssueBtn">Cancel</button>
+                <button type="button" class="btn btn-primary" id="createIssueBtn-${IssueName}">Create Isuue</button>
+                <button type="button" class="btn btn-danger cancelWidget" id="cancelCreateIssueBtn-${IssueName}">Cancel</button>
             </div>
         </form>
     </div>
@@ -59,8 +60,12 @@ export function createIssueWidget(data){
     `;
 
     div1.innerHTML = createIssueHTML;
-    document.getElementById("createIssueBtn").addEventListener('click',createIssueController.bind(null,data));
-    document.getElementById("cancelCreateIssueBtn").addEventListener("click",closeCreateIssueWidget);
+
+    let createIssueButtonName = 'createIssueBtn-' + IssueName;
+    document.getElementById(createIssueButtonName).addEventListener('click',createIssueController.bind(null,data));
+
+    let cancelCreateIssueButtonName = 'cancelCreateIssueBtn-' + IssueName;
+    document.getElementById(cancelCreateIssueButtonName).addEventListener("click",closeCreateIssueWidget);
 
     function closeCreateIssueWidget(){
         div1.innerHTML = null;

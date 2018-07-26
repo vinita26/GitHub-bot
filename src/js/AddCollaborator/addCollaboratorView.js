@@ -11,13 +11,35 @@ export function addCollaboratorWidget(data){
     div1.id= 'editIssue';
     body.append(div1);
 
-    var editIssueHTML = '<div class="container my-3 mx-auto border border-info rounded" id="issueWidget"><h3>Add Collaborator: </h3><div class="row p-3"> <form method="post" action="#" class="w-75 text-center"> <div class="form-group row"><label for="repoName" class="col-sm-3 col-form-label">Repository Name:*</label><div class="col-sm-9"><input type="text" class="form-control" id="RepoName" value='+RepoName+'></div> </div><div class="form-group row"> <label for="issueTitle" class="col-sm-3 col-form-label">CollaboratorId:*</label><div class="col-sm-9"> <input type="text" class="form-control" id="issueTitle" value='+CollaboratorName+'> </div> </div> <div><button type="button" class="btn btn-primary" id="addCollaborator">Add Collaborator</button> <button type="button" class="btn btn-danger cancelWidget" id="cancelEditIssueWidget">Cancel</button> </div> </form> </div> </div></div>';
+    var editIssueHTML = `
+    <div class="container my-3 mx-auto border border-info rounded" id="repoWidget">
+    <h3>Add Collaborator:</h3>
+    <div class="row p-3">
+        <form method="post" action="#" class="w-75 text-center">
+            <div class="form-group row">
+                <label for="repoName" class="col-sm-3 col-form-label">Repo Name:*</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="repoName" value='${RepoName}'>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="collaboratorName" class="col-sm-3 col-form-label">CollaboratorId:*</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="repoDesc" value='${CollaboratorName}'>
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary" id="addCollaborator-${CollaboratorName}">Add Collaborator</button>
+                <button type="button" class="btn btn-danger cancelWidget" id="cancelAddCollWidget-${CollaboratorName}">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>`;
 
     div1.innerHTML = editIssueHTML;
 
-    document.getElementById('addCollaborator').addEventListener('click',addCollaboratorController.bind(null,data));
-
-    
+    let addCollaboratorButtonName = 'addCollaborator-' + CollaboratorName;
+    document.getElementById(addCollaboratorButtonName).addEventListener('click',addCollaboratorController.bind(null,data));
 
     function addCollaboratorFunction(){
         const issueUri = 'https://api.github.com/repos/vinita26/' + RepoName + '/collaborators/'+CollaboratorName;
@@ -39,7 +61,10 @@ export function addCollaboratorWidget(data){
     .catch(error => window.confirm('ERROR::', error));
   }
 
-    document.getElementById('cancelEditIssueWidget').addEventListener('click',closeRepoWidget);
+
+    let cancelAddCollButtonName = 'cancelAddCollWidget-' + CollaboratorName;
+
+    document.getElementById(cancelAddCollButtonName).addEventListener('click',closeRepoWidget);
     function closeRepoWidget(){
         div1.innerHTML = null;
     }

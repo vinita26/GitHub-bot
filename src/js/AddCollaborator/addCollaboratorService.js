@@ -1,6 +1,8 @@
-export function addCollaboratorFunction(data){
-    const gitHubAuthentication = 'Bearer 8c02c2d99549cc41b7c58921fad6d86b174f4566';
+import {gitHubAuthentication} from '../recast-ai';
+import {store} from '../state';
 
+export function addCollaboratorFunction(data){
+   
     let arrayData = data.split(' ');
     let RepoName = arrayData[0];
     var CollaboratorName = arrayData[1];
@@ -24,9 +26,13 @@ export function addCollaboratorFunction(data){
 }).then(response => {
     if(response.status=='201' || response.status=='200'){
         body.appendChild(successAlertDiv);
+        //Trigger Events
+        store.dispatch({type: 'ADD_COLLABORATOR_CLICKED', item: 'ADD_COLLABORATOR_CLICKED' + ' ' +data});
     }
     else{
         body.appendChild(failedAlertDiv);
+        //Trigger Events
+        store.dispatch({type: 'ADD_COLLABORATOR_CLICKED', item: 'ADD_COLLABORATOR_CLICKED' + ' ' +data});
     }
 })
 .catch(error => window.confirm('ERROR::', error));
