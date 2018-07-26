@@ -51,6 +51,27 @@ store.subscribe(render);
 function render(){
   localvalue = JSON.parse(window.localStorage.getItem('States'));
   console.log("local value:", localvalue);
-
+  let localValueArray = localvalue['items'];
+  for(let item of localValueArray){
+    console.log("each value:", item );
+    //can store history by picking each item
+    
+    let action_name = item.substr(0,item.indexOf(' '));
+    console.log('actionAName:', action_name);
+    let queryValue = item.substr(item.indexOf(' ')+1);
+    console.log('queryValue:', queryValue);
+    if(action_name== 'SEARCHED_ITEM_CLICKED' && queryValue.startsWith("create repo")){
+       console.log("true");
+       let value = queryValue.split(" ");
+       let repoName = value[2];
+       console.log('reponame', repoName);
+       
+     }
+    else{
+       console.log('false');
+    }
+    
+  }
+  
 }
 

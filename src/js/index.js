@@ -25,7 +25,12 @@ function callRecast(){
 
 function triggerSearchAction(){
     const queryCommand = document.getElementById('searchbox').value;  
-    store.dispatch({type: 'SEARCHED_ITEM_CLICKED', item: 'SEARCHED_ITEM_CLICKED' + ' ' +queryCommand});
+    if(queryCommand==""){
+        window.confirm("Please enter your query in query box");
+    }
+    else{
+        store.dispatch({type: 'SEARCHED_ITEM_CLICKED', item: 'SEARCHED_ITEM_CLICKED' + ' ' +queryCommand});
+    }
    }
 
 function clearQueryText(){
