@@ -8,11 +8,11 @@ export function createIssueWidget(data){
 
     let IssueName = arrayData[1];
 
-    let body = document.querySelector('body');    
+    let widgets = document.getElementById('widgets');    
     let div1 = document.createElement('div');
     div1.id= "createIssue";
     div1.className = "createNewIssue";
-    body.append(div1);
+    widgets.prepend(div1);
 
     let createIssueHTML = `
     <div class="container my-3 mx-auto border border-info rounded" id="issueWidget">
