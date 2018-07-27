@@ -8,7 +8,8 @@ export function createIssueFunction(data){
 
     const IssueName = arrayData[1];
     
-    let body = document.querySelector('body'); 
+    //let body = document.querySelector('body');
+    let widgets = document.getElementById('widgets');    
 
     let successAlertDiv = document.createElement('div');
     successAlertDiv.innerHTML = '<div class="alert alert-success" role="alert"> Created Issue '+IssueName+' successfully in repo '+RepoName+' </div>';
@@ -32,11 +33,11 @@ export function createIssueFunction(data){
       })
 }).then(response => {
     if(response.status=='201' || response.status=='200'){
-        body.appendChild(successAlertDiv);
+        widgets.prepend(successAlertDiv);
         store.dispatch({type: 'CREATE_ISSUE_CLICKED', item: 'CREATE_ISSUE_CLICKED' + ' ' +data});
     }
     else{
-        body.appendChild(failedAlertDiv);
+        widgets.prepend(failedAlertDiv);
         store.dispatch({type: 'CREATE_ISSUE_CLICKED', item: 'CREATE_ISSUE_CLICKED' + ' ' +data});
     }
 })

@@ -5,7 +5,7 @@ export function createRepoConfirmFunction(data){
     
     console.log("Store value:", store);
 
-const body = document.querySelector('body');
+let widgets = document.getElementById('widgets');   
 const successAlertDiv = document.createElement('div');
 successAlertDiv.innerHTML = '<div class="alert alert-success" role="alert"> Created repo '+data+' successfully  </div>';
 
@@ -21,16 +21,24 @@ failedAlertDiv.innerHTML = '<div class="alert alert-danger" role="alert"> Error,
     body: JSON.stringify({'name': data})
 }).then(response => {
     if(response.status=='201' || response.status=='200'){
-        body.appendChild(successAlertDiv);
-        //Trigger Events
-        store.dispatch({type: 'CREATE_REPO_CLICKED', item: 'CREATE_REPO_CLICKED' + ' ' +data});
-        
+        widgets.prepend(successAlertDiv);
+        let storeState = store.getState();
+        let objectItems = storeState.items;
+        for(let obj of objectItems){
+            if(obj.createRepo.Reponame==data){
+                obj.response = response;
+            }
+        }
     }
     else{
-        body.appendChild(failedAlertDiv);
-        //Trigger Events
-        store.dispatch({type: 'CREATE_REPO_CLICKED', item: 'CREATE_REPO_CLICKED' + ' ' +data});
-        
+        widgets.prepend(failedAlertDiv);
+        let storeState = store.getState();
+        let objectItems = storeState.items;
+        for(let obj of objectItems){
+            if(obj.createRepo.Reponame==data){
+                obj.response = response;
+            }
+        }
     }
 })
 .catch(error => console.error('ERROR::', error));
