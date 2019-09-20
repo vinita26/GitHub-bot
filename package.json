@@ -19,11 +19,13 @@
     "popper.js": "^1.14.3",
     "redux": "^4.0.0",
     "style-loader": "^0.21.0",
-    "webpack": "^4.16.1"
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1"
   },
   "devDependencies": {
+    "ajv": "^6.10.2",
     "eslint": "^5.2.0",
-    "eslint-config-google": "^0.9.1",
-    "webpack-cli": "^3.0.8"
+    "eslint-config-google": "^0.9.1"
   }
 }

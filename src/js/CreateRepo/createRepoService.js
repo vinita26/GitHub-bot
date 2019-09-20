@@ -7,10 +7,10 @@ export function createRepoConfirmFunction(data){
 
 let widgets = document.getElementById('widgets');   
 const successAlertDiv = document.createElement('div');
-successAlertDiv.innerHTML = '<div class="alert alert-success" role="alert"> Created repo '+data+' successfully  </div>';
+successAlertDiv.innerHTML = '<div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success: </strong>Created repo '+data+' successfully  </div>';
 
 const failedAlertDiv = document.createElement('div');
-failedAlertDiv.innerHTML = '<div class="alert alert-danger" role="alert"> Error, Repo '+data+' not created</div>';
+failedAlertDiv.innerHTML = '<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Error: </strong>Repo '+data+' not created</div>';
         
     fetch('https://api.github.com/user/repos', {
     method: 'POST',

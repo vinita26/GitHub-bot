@@ -1,5 +1,6 @@
 const uri= 'https://api.recast.ai/v2/request?text=';
-const token = 'Token 61ea44f55507a3cca8be9775f2bd8286';
+//const token = 'Token 61ea44f55507a3cca8be9775f2bd8286';
+const token = 'Token 63673448c4651955065aef718e6099c6';
 let h = new Headers();
 h.append('Content-Type','application/json');
 h.append('Authorization',token);
@@ -11,7 +12,8 @@ import { editIssueWidget } from './EditIssue/editIssueView';
 import { displayAllIssuesWidget} from './displayIssues';
 import { addCollaboratorWidget } from './AddCollaborator/addCollaboratorView';
 
-export const gitHubAuthentication = 'Bearer 6f05928440d56fb8b1c15e23440c28a211562e59';
+//export const gitHubAuthentication = 'Bearer 6f05928440d56fb8b1c15e23440c28a211562e59';
+export const gitHubAuthentication = 'Bearer b3744974efee62ba812bfefb042aabffcfb1ab36';
 
 let localvalue = '';
 
@@ -142,9 +144,3 @@ export default class RecastApi{
          });
      }       
 }
-
-
-
-
-
-
