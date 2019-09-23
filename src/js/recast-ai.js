@@ -13,7 +13,7 @@ import { displayAllIssuesWidget} from './displayIssues';
 import { addCollaboratorWidget } from './AddCollaborator/addCollaboratorView';
 
 //export const gitHubAuthentication = 'Bearer 6f05928440d56fb8b1c15e23440c28a211562e59';
-export const gitHubAuthentication = 'Bearer b3744974efee62ba812bfefb042aabffcfb1ab36';
+export const gitHubAuthentication = 'Bearer f8c3cacfcdf8901ce716d1f196c48f8cdae8bc15';
 
 let localvalue = '';
 
