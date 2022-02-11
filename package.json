@@ -24,7 +24,7 @@
     "webpack-dev-server": "^3.8.1"
   },
   "devDependencies": {
-    "ajv": "^6.10.2",
+    "ajv": "^6.12.3",
     "eslint": "^5.2.0",
     "eslint-config-google": "^0.9.1"
   }
